@@ -16,9 +16,12 @@
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/locale-all.js" integrity="sha512-lzvXbK2Z61cYyqSvLmP5MizHC5vsIfco66gwn9UGSowzbPXVUicx6b7EWwJJl0ibxOY6uY3tLvV/xPToe34FSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   
 

@@ -15,7 +15,23 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        return view('fullcalendar.index');
+        $events = array();
+        $turnos = Turno::all();
+        foreach($turnos as $turno) {
+            
+            $events[] = [
+                'id' => $turno->id,
+                'title' => $turno->title,
+                'end' => $turno->end_date,
+                'start' => $turno->start_date,
+                'descripcion' => $turno->descripcion,
+                'color' => $turno->color,
+            ];
+        }
+
+        
+
+        return view('fullcalendar.index', ['events' => $events]);
     }
 
     /**
@@ -36,8 +52,24 @@ class TurnoController extends Controller
      */
     public function store(Request $request)
     {
+        $turno = Turno::create([
+            'title' => $request->title,
+            'end_date' => $request->end_date,
+            'start_date' => $request->start_date,
+            'descripcion' => $request->descripcion,
+            'color' => $request->color
+        ]);
+
         
-        $turno = Turno::create($request->all());
+
+        return response()->json([
+            'id' => $turno->id,
+            'start' => $turno->start_end,
+            'end' => $turno->end_date,
+            'title' => $turno->title,
+            'descripcion' => $request->descripcion,
+            'color' => $turno->color,
+        ]);
     }
 
     /**
@@ -48,7 +80,7 @@ class TurnoController extends Controller
      */
     public function show(Turno $turno)
     {
-        //
+        
     }
 
     /**
@@ -69,9 +101,22 @@ class TurnoController extends Controller
      * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Turno $turno)
+    public function update(Request $request, $id)
     {
-        //
+        $turno = Turno::find($id);
+        if(! $turno) {
+            return response()->json([
+                'error' => 'No es posible localizar el evento'
+            ], 404);
+        }
+        $turno->update([
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            
+
+        ]);
+
+        return response()->json('Event updated');
     }
 
     /**
@@ -80,8 +125,17 @@ class TurnoController extends Controller
      * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Turno $turno)
+    public function destroy($id)
     {
-        //
+        $turno = Turno::find($id);
+        if(! $turno) {
+            return response()->json([
+                'error' => 'No es posible localizar el evento'
+            ], 404);
+        }
+        $turno->delete();
+        return $id;
     }
+
+    
 }
